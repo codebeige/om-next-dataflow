@@ -1,0 +1,7 @@
+/target/
+/logs/
+.lein-*
+.nrepl-*
+.repl
+*jar
+pom.xml
