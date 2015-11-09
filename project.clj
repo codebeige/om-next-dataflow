@@ -6,7 +6,15 @@
 
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.145"]
-                 [org.omcljs/om "1.0.0-alpha14"]]
+                 [cljsjs/react "0.14.0-1"]
+                 [cljsjs/react-dom "0.14.0-1"]
+                 [org.omcljs/om "1.0.0-alpha14"]
+                 [sablono "0.4.0"]]
+
+  :exclusions [org.clojure/clojure
+               org.clojure/clojurescript
+               cljsjs/react
+               cljsjs/react-dom]
 
   :plugins [[lein-cljsbuild "1.1.0"]
             [lein-figwheel "0.4.1"]]

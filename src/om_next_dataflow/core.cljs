@@ -1,13 +1,16 @@
-(ns om-next-dataflow.core)
+(ns om-next-dataflow.core
+  (:require cljsjs.react.dom
+            [om.next :as om :refer-macros [defui]]
+            [sablono.core :as html :refer-macros [html]]))
 
-(defn init []
- (enable-console-print!)
- {:message "Hello from ClojureScript!!!"})
+(defui Diner
+  Object
+  (render [this]
+          (html [:#om-next-diner [:h2 "Yes, we are open!"]])))
 
-(defonce config (init))
+(def diner (om/factory Diner))
 
 (defn main []
-  (println (:message config))
-  nil)
+  (.render js/ReactDOM (diner) (.getElementById js/document "app")))
 
 (defonce app (main))
