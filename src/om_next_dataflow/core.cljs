@@ -3,7 +3,8 @@
   (:require cljsjs.react.dom
             [om.next :as om]
             [om-next-dataflow.components :refer [Diner]]
-            [om-next-dataflow.parsers.atom :refer [create-menu serve]]))
+            ;; [om-next-dataflow.parsers.atom :refer [create-menu serve]]
+            [om-next-dataflow.parsers.datascript :refer [create-menu serve]]))
 
 (enable-console-print!)
 

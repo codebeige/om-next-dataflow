@@ -8,6 +8,7 @@
                  [org.clojure/clojurescript "1.7.145"]
                  [cljsjs/react "0.14.0-1"]
                  [cljsjs/react-dom "0.14.0-1"]
+                 [datascript "0.13.3"]
                  [org.omcljs/om "1.0.0-alpha14"]
                  [sablono "0.4.0"]]
 
