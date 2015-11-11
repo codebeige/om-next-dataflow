@@ -8,20 +8,30 @@
                  [org.clojure/clojurescript "1.7.145"]
                  [cljsjs/react "0.14.0-1"]
                  [cljsjs/react-dom "0.14.0-1"]
+                 [com.datomic/datomic-free "0.9.5327"]
                  [datascript "0.13.3"]
+                 [joda-time "1.6"]
                  [org.omcljs/om "1.0.0-alpha14"]
                  [sablono "0.4.0"]]
 
   :exclusions [org.clojure/clojure
                org.clojure/clojurescript
                cljsjs/react
-               cljsjs/react-dom]
+               cljsjs/react-dom
+               joda-time]
 
   :plugins [[lein-cljsbuild "1.1.0"]
-            [lein-figwheel "0.4.1"]]
+            [lein-figwheel "0.4.1"]
+            [lein-pdo "0.1.1"]
+            [lein-shell "0.4.1"]]
 
   :source-paths ["src"]
   :resource-paths ["resources" "target/cljs"]
+
+  :aliases {"datomic" ["shell"
+                       "bin/transactor"
+                       "config/samples/free-transactor-template.properties"]
+            "dev" ["pdo" ["datomic"] ["figwheel"]]}
 
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src"]
@@ -40,7 +50,7 @@
              ;; :server-port 3449 ;; default
              ;; :server-ip "127.0.0.1"
 
-             :css-dirs ["resources/public/css"] ;; watch and update CSS
+             ;; :css-dirs ["resources/public/css"] ;; watch and update CSS
 
              ;; Start an nREPL server into the running figwheel process
              ;; :nrepl-port 7888
@@ -64,5 +74,7 @@
              ;; :repl false
 
              ;; to configure a different figwheel logfile path
-             :server-logfile "logs/figwheel.log"
-             })
+             :server-logfile "log/figwheel.log"
+             }
+
+  :shell {:commands {"bin/transactor" {:dir "db/datomic-free-0.9.5327"}}})

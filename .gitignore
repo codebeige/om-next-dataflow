@@ -1,5 +1,7 @@
 /target/
-/logs/
+/log/
+/db/datomic-*/log/
+/db/datomic-*/data/
 .lein-*
 .nrepl-*
 .repl

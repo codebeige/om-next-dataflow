@@ -9,7 +9,7 @@ managing local app state and syncing with remote services.
 
 To get an interactive development environment run:
 
-    lein figwheel
+    lein dev
 
 and open your browser at [localhost:3449](http://localhost:3449/).
 
