@@ -3,26 +3,23 @@
 
 (defn create-menu []
   (doto (datascript/create-conn
-         {:dish/aliases {:db/cardinality :db.cardinality/many}})
+         {:dish/aliases {:db/cardinality :db.cardinality/many}
+          :dish/components {:db/cardinality :db.cardinality/many}})
     (datascript/transact!
-     [{:db/id -1
-       :dish/number 1
+     [{:dish/number 1
        :dish/name "Chef Salad"
        :dish/components [:eggs :turkey :cheese :lettuce :oil :vinegar]}
 
-      {:db/id -2
-       :dish/number 2
+      {:dish/number 2
        :dish/name "Pie a la mode"
        :dish/aliases ["Apple a la mode" "Vanilla"]
        :dish/components [:apple-pie :vanilla-ice-cream]}
 
-      {:db/id -3
-       :dish/number 3
+      {:dish/number 3
        :dish/name "Meatloaf Sandwich"
        :dish/components [:meatloaf :lettuce :tomato :mayo :sourdough]}
 
-      {:db/id -4
-       :dish/number 4
+      {:dish/number 4
        :dish/name "Strawberry Sundae"
        :dish/components [:strawberry-ice-cream :wafer :whipped-cream]}])))
 
@@ -46,8 +43,10 @@
 
 (defmethod serve :dish/name [{:keys [state]} _ params]
   {:value (-> (datascript/q '[:find (pull ?e [*]) .
-                              :in $ ?name
-                              :where [?e _ ?name]]
-                            @state (:om.next/refid params))
-              (arrange (:aside params [])))})
-
+                              :in $ % ?name
+                              :where (has-name ?e ?name)]
+                            @state
+                            '[[(has-name ?e ?name) [?e :dish/name ?name]]
+                              [(has-name ?e ?name) [?e :dish/aliases ?name]]]
+                            (:om.next/refid params))
+              (arrange (:aside params)))})
